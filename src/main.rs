@@ -64,8 +64,8 @@ fn main() {
 	let columns = matches.value_of("columns").unwrap_or_default();
 	let columns = columns.parse::<usize>().unwrap();
 	if columns < 1 {
-		if let Err(e) = app.print_help() {
-			panic!("something went wrong: {}", e);
+		if let Err(e) = app.print_long_help() {
+			panic!("something terrible has happened: {}", e);
 		}
 		return;
 	}
@@ -73,8 +73,8 @@ fn main() {
 	let width = matches.value_of("width").unwrap_or_default();
 	let width = width.parse::<usize>().unwrap();
 	if width < 5 {
-		if let Err(e) = app.print_help() {
-			panic!("something went wrong: {}", e);
+		if let Err(e) = app.print_long_help() {
+			panic!("something terrible has happened: {}", e);
 		}
 		return;
 	}
