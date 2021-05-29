@@ -20,18 +20,18 @@ impl Viewer {
 
 	pub fn draw(&mut self, data: &[u8]) {
 		// continue current row
-		let max = cmp::min(data.len(), self.columns - self.current_column);
-		for c in 0..max {
+		let remaining_columns = cmp::min(data.len(), self.columns - self.current_column);
+		for c in 0..remaining_columns {
 			self.draw_character(data[c]);
 		}
 
 		// complete row if we're done with it
-		if self.current_column + max == self.columns {
+		if self.current_column + remaining_columns == self.columns {
 			print!("\n");
 
 			// if there's data left, draw it line-by-line
-			if max < data.len() {
-				let new_slice = &data[max..];
+			if remaining_columns < data.len() {
+				let new_slice = &data[remaining_columns..];
 				self.draw_lines(new_slice);
 				self.current_column = ((new_slice.len() + self.columns - 1) % self.columns) + 1;
 			}
@@ -40,7 +40,7 @@ impl Viewer {
 			}
 		}
 		else {
-			self.current_column += max;
+			self.current_column += remaining_columns;
 		}
 	}
 }
@@ -51,10 +51,9 @@ impl Viewer {
 		let n = (data.len() + self.columns - 1) / self.columns;
 		for r in 0 .. n - 1 {
 			let i = r * self.columns;
-			for c in 0..self.columns - 1 {
+			for c in 0..self.columns {
 				self.draw_character(data[i + c]);
 			}
-			self.draw_character(data[i + self.columns - 1]);
 			print!("\n");
 		}
 
