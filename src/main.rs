@@ -1,4 +1,4 @@
-use byte_viewer::Viewer;
+use bytes::Viewer;
 
 use clap::{Arg, App};
 
@@ -41,7 +41,7 @@ fn read_stdin(viewer: &mut Viewer) {
 }
 
 fn main() {
-	let mut app = App::new("byte_viewer")
+	let mut app = App::new("bytes")
 		.version("0.1.0")
 		.author("David Westen <davidlwesten@protonmail.com")
 		.arg(Arg::with_name("columns")
