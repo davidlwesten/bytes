@@ -1,10 +1,11 @@
-use bytes::Viewer;
-
 use clap::{Arg, App};
 
 use std::fs::File;
 use std::io::{self, Read};
 use std::path::Path;
+
+mod viewer;
+use viewer::Viewer;
 
 fn read_loop<T: Read>(viewer: &mut Viewer, data: &mut T) {
 	let mut buffer: [u8; 1024] = [0; 1024];
